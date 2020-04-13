@@ -1,0 +1,62 @@
+<script>
+  const taylorTimes = ["Monday 8am","Monday 1pm","Tuesday 9am","Friday 5pm"]
+  const samanthaTimes = ["Tuesday 8am","Wednesday 1pm","Tuesday 9am","Friday 4:30pm"]
+  const christianaTimes = ["Monday 8am","Tuesday 1pm","Tuesday 5pm","Friday 8:30am"]
+  const patrickTimes = ["Wednesday 8am","Thursday 1:30pm","Friday 9am","Friday 5pm"]
+  function respond(response) {
+    // DON'T CHANGE THIS BLOCK
+    if (response === "stop") {
+      return false;
+    }
+
+    // CHANGE STARTING HERE
+    var name = response;
+    response = prompt("Hello "+name+  ", what can I help you with today?")
+    if (/\bschedule appointment\b|\bcheck available times\b|s/i.test(response)) {
+      advisor = prompt("You would like to schedule an appointment. Who is your academic advisor?")
+      if (/\btaylor\b/i.test(advisor)) {
+        times = taylorTimes
+      } else if (/\bsamantha\b/i.test(advisor)) {
+        times = samanthaTimes
+      } else if (/\bchristiana\b/i.test(advisor)) {
+        times = christianaTimes
+      } else if (/\bpatrick\b/i.test(advisor)) {
+        times = patrickTimes
+      }
+      userTime = prompt("Ok. What time would you like to schedule an appointment with " +advisor+ "? Format your date like Monday 9am")
+      if (times.includes(userTime)) {
+        response = prompt("Sure.")
+      } else {
+        var randomTime = times[Math.floor(Math.random() * times.length)];
+        response = prompt("Sorry the time you entered is either not available or formatted incorrectly. Does the following time work for you? "+randomTime)
+        var attempts = 0
+        while (attempts < 5) {
+          // give another attempt
+
+          window.location.replace("https://www.imse.iastate.edu/advising-and-student-services/schedule-an-appointment/")
+          attempts++
+          var randomTime = times[Math.floor(Math.random() * times.length)];
+          response = prompt("Sorry the time you entered is either not available or formatted incorrectly. Does the following time work for you? "+randomTime)
+          if (/\byes\b/i.test(response)) {
+            alert("You have an appointment with " +advisor+ " at " +randomTime)
+            return
+          } else {
+            var randomTime = times[Math.floor(Math.random() * times.length)];
+            response = prompt("Sorry the time you entered is either not available or formatted incorrectly. Does the following time work for you? "+randomTime)
+        }
+        if (/\byes\b/i.test(response)) {
+          response = prompt("You have an appointment with " +advisor+ "at " +randomTime)
+        } else if (/\bno\b/i.test(response)) {
+          } else {
+      response = prompt("Oops! You are in the wrong place. We are Iowa State Academic Advising.")
+    }
+}
+}
+}
+
+
+    // DON'T CHANGE BELOW
+    respond(response)
+  }
+  respond(prompt("Hello! Welcome to Iowa State's Academic Advising chatbot. What is your name?")) // change what's in quotes
+</script>
